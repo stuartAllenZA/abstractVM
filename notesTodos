@@ -13,3 +13,14 @@ d) translation table = A table of information stored within a processor or a per
 
 e) look into non-blocking IO with select(2)/poll(2)/epoll(7).
 
+f) create lexer and parser classes from the start (bonus)
+
+g) use runtime_error to create own exceptions
+
+h) bonus: 
+	creation of virtual chipset
+	generation of virtual addresses based on physical addreses
+	use of memory cache and register keyword
+	interactive shell
+	verbosity: flag parameter or shell command
+	log: flag parameter or shell command
