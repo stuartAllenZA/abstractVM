@@ -1,0 +1,15 @@
+Main memory is directly or indirectly connected to the central processing unit via a memory bus. It is actually two buses (not on the diagram): an address bus and a data bus.
+1. The CPU firstly sends a number through an address bus, a number called memory address, that indicates the desired location of data.
+2. Then it reads or writes the data in the memory cells using the data bus. 
+3. Additionally, a memory management unit (MMU) is a small device between CPU and RAM recalculating the actual memory address, for example to provide an abstraction of virtual memory or other tasks.
+
+//
+
+a) use register keyword for values to be stored in memory cache/translattion lookaside buffer (TLB)
+b) virtual address = virtual page number + offset
+c) virtual page number = page table + physical page number
+
+d) translation table = A table of information stored within a processor or a peripheral that is used to convert encoded information into another form of code with the same meaning. There are a variety of codes used within the field of computing and sometimes more than one code may be used within a single system. For output devices such as printers the ASCII code is widely used but the code used within the processor may be EBCDIC. A translation table is used to make the required conversion."
+
+e) look into non-blocking IO with select(2)/poll(2)/epoll(7).
+
