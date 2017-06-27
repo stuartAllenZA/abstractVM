@@ -8,6 +8,7 @@ Stack::Stack(int size) {
 	stackPtr = new char(size);	
 	stackSize = size;
 	lookupTable = new void*[1000];
+	memoryCache = new void*[10];
 }
 
 void	Stack::dump() {
@@ -44,10 +45,28 @@ void	Stack::dump() {
 			<< std::endl
 			;*/
 	}
-	for (int i = 0; i < 1000; i++) {
+	delete stackPtr;
+	for (int i = 0; i < 4; i++) {
 		std::cout
+			<< "index "
+			<< i
+			<< ": "
 			<< lookupTable[i]
 			<< std::endl
 			;
 	}
+	//&lookupTable[0] = 'k';
+	int *temp = static_cast<int*>(lookupTable[0]);
+	*temp = 5;
+	std::cout
+		<< "table at 0: "
+		<< lookupTable[0]
+		<< std::endl
+		<< "address of temp: "
+		<< temp
+		<< std::endl
+		<< "value of temp: "
+		<< *temp
+		<< std::endl
+		;
 }

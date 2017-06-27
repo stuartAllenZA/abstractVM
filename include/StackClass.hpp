@@ -5,6 +5,7 @@
 
 class Stack {
 	private:
+		void	**memoryCache;
 		void	**lookupTable;
 		int		blockIndex;
 		char	*stackPtr;
