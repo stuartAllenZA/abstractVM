@@ -12,38 +12,11 @@ Stack::Stack(int size) {
 }
 
 void	Stack::dump() {
-//	void *temp;
 	int a = 0;
-/*	int count = 1;
-		std::cout
-			<< "stack index "
-			<< a++
-			<< ": "
-			<< std::endl
-			<< std::endl
-			;*/
 	for (int i = 0; i < stackSize; i++) {
-//		temp = &(stackPtr[i]);
 		if ((i % 64) == 0) {
-	/*	std::cout
-			<< std::endl
-			<< "stack index "
-			<< a++
-			<< ": "
-			<< std::endl
-			<< std::endl
-			;*/
 		lookupTable[a++] = &(stackPtr[i]);
 		}
-	/*	std::cout
-			<< "index "
-			<< i
-			<< ": "
-			<< temp
-			<< "\tcount: "
-			<< count++
-			<< std::endl
-			;*/
 	}
 	delete stackPtr;
 	for (int i = 0; i < 4; i++) {
@@ -55,7 +28,6 @@ void	Stack::dump() {
 			<< std::endl
 			;
 	}
-	//&lookupTable[0] = 'k';
 	int *temp = static_cast<int*>(lookupTable[0]);
 	*temp = 5;
 	std::cout

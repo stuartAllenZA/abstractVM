@@ -7,7 +7,7 @@ class Stack {
 	private:
 		void	**memoryCache;
 		void	**lookupTable;
-		int		blockIndex;
+		//int		blockIndex;
 		char	*stackPtr;
 		int		stackSize;
 
