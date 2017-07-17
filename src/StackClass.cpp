@@ -1,10 +1,24 @@
 #include <StackClass.hpp>
 
-Stack::Stack() {}
+Stack::Stack() {
+	std::cout
+		<< "stack::stack"
+		<< std::endl
+		;
+}
 
-Stack::~Stack() {}
+Stack::~Stack() {
+	std::cout
+		<< "stack::~stack"
+		<< std::endl
+		;
+}
 
 Stack::Stack(int size) {
+	std::cout
+		<< "stack::stack"
+		<< std::endl
+		;
 	stackPtr = new char(size);	
 	stackSize = size;
 	lookupTable = new void*[1000];
@@ -12,6 +26,10 @@ Stack::Stack(int size) {
 }
 
 void	Stack::dump() {
+	std::cout
+		<< "stack::dump"
+		<< std::endl
+		;
 	int a = 0;
 	for (int i = 0; i < stackSize; i++) {
 		if ((i % 64) == 0) {

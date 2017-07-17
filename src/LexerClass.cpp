@@ -1,25 +1,44 @@
 #include <LexerClass.hpp>
 
-Lexer::Lexer() {}
+Lexer::Lexer() {
+	std::cout
+		<< "lexer::lexer"
+		<< std::endl
+		;
+}
 
-Lexer::~Lexer() {}
+Lexer::~Lexer() {
+	std::cout
+		<< "lexer::~lexer"
+		<< std::endl
+		;
+}
 
 // GETTERS
 
 void	Lexer::getSymbols() const {
 	std::cout
-		<< "Symbols found"
+		<< "lexer::getSymbols"
 		<< std::endl
 		;
 }
 
 // SETTERS
 
-void	Lexer::setSymbols() {}
+void	Lexer::setSymbols() {
+	std::cout
+		<< "lexer::setSymbols"
+		<< std::endl
+		;
+}
 
 // METHODS
 
 void	Lexer::shell() {
+	std::cout
+		<< "lexer::shell"
+		<< std::endl
+		;
 	std::string	line;
 	for (;;)
 		std::getline(std::cin, line);
@@ -27,14 +46,18 @@ void	Lexer::shell() {
 
 void	Lexer::read(char *file) {
 	std::cout
-		<< "filename: "
-		<< file
+		<< "lexer::read"
 		<< std::endl
 		;
-	std::ifstream	fileContents(file);
-	std::cout
-		<< fileContents
-		<< std::endl
-		;
+	std::ifstream	fileHandle(file);
+	if (fileHandle.is_open())
+	{
+		std::string line;
+		while (line != ";;") {
+			std::getline (fileHandle,line);
+			std::cout << line << '\n';
+		}
+	fileHandle.close();
+	}
 }
 
