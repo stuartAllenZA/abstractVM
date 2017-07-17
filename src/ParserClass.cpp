@@ -20,4 +20,14 @@ void	Parser::process(const Lexer& lexer) {
 		<< std::endl
 		;
 	lexer.getSymbols();
+	diagnose();
+}
+
+// a collection of a error messages throughout execution ? 
+
+void	Parser::diagnose() {
+	std::cout
+		<< "parser::diagnose"
+		<< std::endl
+		;
 }

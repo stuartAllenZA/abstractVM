@@ -1,27 +1,12 @@
+push int32(42)
+7 push int32(33)
+8 add
+9 push float(44.55)
+10 mul
+11 push double(42.42)
+12 push int32(42)
+13 dump
+14 pop
+15 assert d
 := INSTR [SEP INSTR]* #
-
-INSTR :=
-push VALUE
-| pop
-| dump
-| assert VALUE
-| add
-| sub
-| mul
-| div
-| mod
-| print
-| exit
-
-	VALUE :=
-	int8(N)
-	| int16(N)
-	| int32(N)
-	| float(Z)
-| double(Z)
-
-	N := [-]?[0..9]+
-
-	Z := [-]?[0..9]+.[0..9]+
-
-	SEP := '\n'+
+;;

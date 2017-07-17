@@ -40,7 +40,7 @@ void	Lexer::shell() {
 		<< std::endl
 		;
 	std::string	line;
-	for (;;)
+	while (line != ";;") 
 		std::getline(std::cin, line);
 }
 
@@ -53,8 +53,7 @@ void	Lexer::read(char *file) {
 	if (fileHandle.is_open())
 	{
 		std::string line;
-		while (line != ";;") {
-			std::getline (fileHandle,line);
+		while (std::getline (fileHandle,line)) {
 			std::cout << line << '\n';
 		}
 	fileHandle.close();

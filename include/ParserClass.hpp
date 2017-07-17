@@ -9,7 +9,11 @@ class Parser {
 	public:
 		Parser();
 		~Parser();
+
+		// METHOD
+
 		void	process( const Lexer& );
+		void	diagnose();
 };
 
 #endif
