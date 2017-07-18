@@ -1,24 +1,19 @@
 #include <header.hpp>
 
-int main(int argc, char **argv) {
+int		main(int ac, char **av) {
+	(void)av;
 	Lexer lexer;
 	Parser parser;
-	Stack stack(64000);
-	stack.dump();
-	try {
-		if (argc == 1) {
-			lexer.shell();
+	if (ac == 2)
+		lexer.say();
+	//	lexer.read(av[1]);
+	else {
+		for(;;) {
+			lexer.say();
+			parser.say();
+		//	lexer.getCommand();
+		//	parser.runCommand();
 		}
-		else if (argc == 2) {
-			lexer.read(argv[1]);
-			parser.process(lexer);
-		}
-		else throw std::exception();
-	} catch(std::exception *e) {
-		std::cerr
-			<< e->what()
-			<< std::endl
-			;
 	}
 }
 

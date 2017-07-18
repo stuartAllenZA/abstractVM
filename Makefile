@@ -9,7 +9,6 @@ I = -I include
 SP = ./src/
 
 SRC = $(SP)main.cpp\
-	  $(SP)StackClass.cpp\
 	  $(SP)LexerClass.cpp\
 	  $(SP)ParserClass.cpp
 
