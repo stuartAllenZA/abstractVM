@@ -1,3 +1,8 @@
+CURRENT
+
+1) exceptions classes
+
+
 Main memory is directly or indirectly connected to the central processing unit via a memory bus. It is actually two buses (not on the diagram): an address bus and a data bus.
 1. The CPU firstly sends a number through an address bus, a number called memory address, that indicates the desired location of data.
 2. Then it reads or writes the data in the memory cells using the data bus. 
@@ -5,7 +10,7 @@ Main memory is directly or indirectly connected to the central processing unit v
 
 //
 
-a) use register keyword for values to be stored in memory cache/translattion lookaside buffer (TLB)
+a) use register keyword for values to be stored in memory cache/translation lookaside buffer (TLB)
 b) virtual address = virtual page number + offset
 c) virtual page number = page table + physical page number
 

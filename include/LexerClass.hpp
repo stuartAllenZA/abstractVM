@@ -4,9 +4,12 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <sstream>
+#include <vector>
 
 class Lexer {
 	private:
+		Vector<int>	commands;
 
 	public:
 		Lexer();
@@ -24,6 +27,10 @@ class Lexer {
 
 		void	shell( void );
 		void	read( char * );
+		void	formatString( std::string );
+		void	symLookup( std::string );
+		void	parseSymbol( int );
+		void	parse( std::string );
 };
 
 #endif

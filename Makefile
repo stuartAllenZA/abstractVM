@@ -24,4 +24,4 @@ clean:
 re: clean all
 
 run: re
-	clear && ./$(TARGET) asm.txt
+	clear && ./$(TARGET)
