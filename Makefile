@@ -8,7 +8,7 @@ I = -I include
 
 SP = ./src/
 
-SRC = $(SP)main.cpp\
+SRC = $(SP)AbstractVM.cpp\
 	  $(SP)LexerClass.cpp\
 	  $(SP)ParserClass.cpp
 
