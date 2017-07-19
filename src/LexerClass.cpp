@@ -17,13 +17,19 @@ std::vector<std::string>		*Lexer::getTokens() {
 
 void							Lexer::_readFileContentsToTokens(char *fileName) {
 	std::ifstream fileHandle(fileName);
+	_n = 0;
 	try {
 		if (fileHandle.is_open()) {
-			while (std::getline(fileHandle, _line))
+			while (std::getline(fileHandle, _line)) {
 				_lexicalAnalysis(_line);
+				_n++;
+			}
 		}
 
 		else throw Exceptions::FileException();
+
+		// if (_token[_n] != ";;" || _token[_n - 1] != "exit"))
+		//	throw Exceptions::MissingTerminatorException
 
 	}
 
@@ -33,7 +39,19 @@ void							Lexer::_readFileContentsToTokens(char *fileName) {
 }
 
 void							Lexer::_lexicalAnalysis(std::string _line) {
-	std::cout << "line:" << _line << std::endl;
+	// if (is 2 words)
+	//	split string
+	//	check if word 1 is valid command
+	//		if (yes)
+	//			push_back tokens
+	//			push_back VALUE(enum(word2))
+	//		else throw exception
+	// else if (1 word)
+	//	(check if valid command)
+	//		if (yes)
+	//			push_back tokens
+	//		else throw exception
+	// else throw exception
 	throw Exceptions::FileFormatException();
 }
 

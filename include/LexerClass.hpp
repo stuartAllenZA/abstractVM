@@ -37,6 +37,7 @@ class Lexer {
 		std::vector<std::string>	_tokens;
 		std::vector<VALUES>			_values;
 		std::string					_line;
+		int							_n;
 };
 
 #endif
