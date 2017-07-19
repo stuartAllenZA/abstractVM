@@ -18,6 +18,13 @@ class Exceptions {
 					return "File is in the incorrect format";
 				}
 		};
+
+		class FileException: public std::exception {
+			public:
+				virtual const char* what() const throw() {
+					return "File does not exist or is spelt incorrectly";
+				}
+		};
 };
 
 #endif

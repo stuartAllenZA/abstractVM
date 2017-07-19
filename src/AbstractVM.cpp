@@ -25,6 +25,14 @@ int		main(int ac, char **av) {
 			;
 	}
 
+	catch (Exceptions::FileException const &ex) {
+		std::cerr
+			<< "File exception: "
+			<< ex.what()
+			<< std::endl
+			;
+	}
+
 	catch (std::exception const& ex)
 	{
 		std::cerr
