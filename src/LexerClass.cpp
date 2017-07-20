@@ -84,18 +84,22 @@ bool							Lexer::_isValidOperation(std::string operation) {
 
 bool							Lexer::_isValidLiteral(std::string operation, std::string literal) {
 	std::regex regexInt8 ("int8.?\\(.?\\d+\\)");
-//	std::regex regexInt16 = "int16.?\(.?\d+\)"
-//	std::regex regexInt32 = "int32.?\(.?\d+\)"
+	std::regex regexInt16 ("int16.?\\(.?\\d+\\)");
+	std::regex regexInt32 ("int32.?\\(.?\\d+\\)");
+	std::regex regexFloat ("float\\([+-]?([0-9]*[.])?[0-9]+\\)");
+	std::regex regexDouble ("double\\([+-]?([0-9]*[.])?[0-9]+\\)");
 
 	std::smatch regexInt8Match;
-//	std::smatch regexInt16Match;
-//	std::smatch regexInt32Match;
+	std::smatch regexInt16Match;
+	std::smatch regexInt32Match;
+	std::smatch regexFloatMatch;
+	std::smatch regexDoubleMatch;
 	if ((operation == "push" || operation == "assert") && (
 				regex_match(literal, regexInt8Match, regexInt8) ||
-				literal.substr(0,5) == "int16" ||
-				literal.substr(0,5) == "int32" ||
-				literal.substr(0,5) == "float" ||
-				literal.substr(0,6) == "double")
+				regex_match(literal, regexInt16Match, regexInt16) ||
+				regex_match(literal, regexInt32Match, regexInt32) ||
+				regex_match(literal, regexFloatMatch, regexFloat) ||
+				regex_match(literal, regexDoubleMatch, regexDouble))
 	   )
 		return true;
 	return false;
