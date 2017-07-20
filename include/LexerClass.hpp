@@ -5,8 +5,9 @@
 #include <vector>
 #include <fstream>
 #include <sstream>
-#include "Exceptions.hpp"
 #include <algorithm>
+#include <regex>
+#include "Exceptions.hpp"
 
 enum TYPES {
 	INT8,
