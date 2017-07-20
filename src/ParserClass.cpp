@@ -1,5 +1,10 @@
 #include <ParserClass.hpp>
 
-void	Parser::say() {
-	std::cout << "PARSER\n";
+Parser::Parser(std::vector<std::string> tokenOperations) {
+	std::cout 
+		<< "Parser operation 1: "
+		<< tokenOperations[0]
+		<< std::endl
+		;
 }
+

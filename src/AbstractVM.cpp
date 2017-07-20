@@ -3,7 +3,7 @@
 int		main(int ac, char **av) {
 	try {
 		Lexer lexer(ac, av);
-		//Parser(lexer.getTokens());
+		Parser(lexer.getTokens());
 	}
 
 	catch (Exceptions::ParameterCountException const &ex)
@@ -28,6 +28,14 @@ int		main(int ac, char **av) {
 	catch (Exceptions::FileException const &ex) {
 		std::cerr
 			<< "File exception: "
+			<< ex.what()
+			<< std::endl
+			;
+	}
+
+	catch (Exceptions::MissingTerminatorException const &ex) {
+		std::cerr
+			<< "Missing terminating character/s exception: "
 			<< ex.what()
 			<< std::endl
 			;

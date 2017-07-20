@@ -5,8 +5,8 @@
 #include <vector>
 #include <fstream>
 #include <sstream>
-
 #include "Exceptions.hpp"
+#include <algorithm>
 
 enum TYPES {
 	INT8,
@@ -27,15 +27,17 @@ union VALUES {
 class Lexer {
 	public:
 		Lexer(int, char**);
-		std::vector<std::string>	*getTokens();
+		std::vector<std::string>	getTokens();
 
 	private:
 		void						_readFileContentsToTokens(char*);
 		void						_launchShell();
 		void						_lexicalAnalysis(std::string);
+		bool						_isValidOperation(std::string);
+		bool						_isValidLiteral(std::string, std::string);
 
-		std::vector<std::string>	_tokens;
-		std::vector<VALUES>			_values;
+		std::vector<std::string>	_tokenOperations;
+		std::vector<std::string>	_tokenLiterals;
 		std::string					_line;
 		int							_n;
 };

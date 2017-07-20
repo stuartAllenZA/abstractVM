@@ -25,6 +25,13 @@ class Exceptions {
 					return "File does not exist or is spelt incorrectly";
 				}
 		};
+
+		class MissingTerminatorException: public std::exception {
+			public:
+				virtual const char* what() const throw() {
+					return "Missing 'exit' or ';;' from end of program";
+				}
+		};
 };
 
 #endif

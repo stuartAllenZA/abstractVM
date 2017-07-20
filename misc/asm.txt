@@ -1,12 +1,14 @@
+;hello this is a comment
 push int32(42)
-7 push int32(33)
-8 add
-9 push float(44.55)
-10 mul
-11 push double(42.42)
-12 push int32(42)
-13 dump
-14 pop
-15 assert d
-:= INSTR [SEP INSTR]* #
+push int32(33)
+add
+push float(44.55)
+mul
+push double(42.42)
+push int32(42)
+;hello this is also a comment
+dump
+pop
+assert double(42.42)
+exit
 ;;
