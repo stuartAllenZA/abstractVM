@@ -1,10 +1,16 @@
 #include <iostream>
-#include <vector>
+#include <list>
 #include <string>
 #include "LexerClass.hpp"
+#include <TokenClass.hpp>
 
 class Parser {
 	public:
-		void say();
-		Parser(std::vector<std::string>);
+		Parser(std::list<std::string>, std::list<std::string>);
+
+	private:
+		std::list<Token> stack;
+
+
 };
+

@@ -1,10 +1,19 @@
 #include <ParserClass.hpp>
 
-Parser::Parser(std::vector<std::string> tokenOperations) {
-	std::cout 
-		<< "Parser operation 1: "
-		<< tokenOperations[0]
-		<< std::endl
-		;
+Parser::Parser(std::list<std::string> tokenOperations, std::list<std::string> tokenLiterals) {
+	std::list<std::string>::const_iterator literalStart = tokenLiterals.begin();
+	for (std::list<std::string>::const_iterator start = tokenOperations.begin(); start != tokenOperations.end(); start++) {
+		if (*start == "push" || *start == "assert") {
+			std::cout
+				<< *literalStart
+				<< std::endl
+				;
+			literalStart++;
+			//do something ...
+
+			//			tokenLiterals.pop_front();
+		}
+		//	tokenOperations.pop_front();
+	}
 }
 

@@ -3,7 +3,10 @@
 int		main(int ac, char **av) {
 	try {
 		Lexer lexer(ac, av);
-		Parser(lexer.getTokens());
+		Parser(
+				lexer.getTokensOperations(),
+				lexer.getTokensLiterals()
+		);
 	}
 
 	catch (Exceptions::ParameterCountException const &ex)

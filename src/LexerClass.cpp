@@ -11,8 +11,12 @@ Lexer::Lexer(int ac, char **av) {
 	else throw;
 }
 
-std::vector<std::string>		Lexer::getTokens() {
+std::list<std::string>		Lexer::getTokensOperations() {
 	return _tokenOperations;
+}
+
+std::list<std::string>		Lexer::getTokensLiterals() {
+	return _tokenLiterals;
 }
 
 void							Lexer::_readFileContentsToTokens(char *fileName) {
@@ -32,11 +36,16 @@ void							Lexer::_readFileContentsToTokens(char *fileName) {
 
 		else throw Exceptions::FileException();
 
-		try {
-			if (_tokenOperations[_n - 1] != ";;" || _tokenOperations[_n - 2] != "exit")
-				throw Exceptions::MissingTerminatorException();
-		} catch (Exceptions::MissingTerminatorException const &) { throw; }
+		std::list<std::string>::iterator start;
 
+		int count = 0;
+		try {
+			for (start = _tokenOperations.begin();start != _tokenOperations.end(); start++) {
+				if ((count == _n && *start != ";;") && (((count - 1) == (_n - 1)) && *(--start) != "exit")) 
+					throw Exceptions::MissingTerminatorException();
+				count++;
+			}
+		} catch (Exceptions::MissingTerminatorException const &) { throw; }
 	}
 
 	catch (Exceptions::FileFormatException const &) { throw; }
@@ -77,6 +86,7 @@ bool							Lexer::_isValidOperation(std::string operation) {
 			operation == "mod" ||
 			operation == "dump" ||
 			operation == "exit" ||
+			operation == "print" ||
 			operation == ";;")
 		return true;
 	return false;
@@ -121,19 +131,12 @@ void							Lexer::_launchShell() {
 				_n++;
 			}
 		}
-		std::cout << "n: " << _n;
-		for (int i = 0; i < _n; i++) {
-			std::cout
-				<< "token operation "
-				<< i
-				<< "\t"
-				<< _tokenOperations[i]
-				<< std::endl
-				;
-		}
+
+		std::list<std::string>::const_iterator tokenOperationsEnd = _tokenOperations.end();
+
 
 		try {
-			if (_tokenOperations[_n - 1] != ";;" || _tokenOperations[_n - 2] != "exit")
+			if (*tokenOperationsEnd != ";;" || *(--tokenOperationsEnd) != "exit")
 				throw Exceptions::MissingTerminatorException();
 		} catch (Exceptions::MissingTerminatorException const &) { throw; }
 	} catch (Exceptions::FileFormatException const &) { throw; }

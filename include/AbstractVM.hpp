@@ -4,6 +4,7 @@
 #include "Exceptions.hpp"
 #include "LexerClass.hpp"
 #include "ParserClass.hpp"
+#include "TokenClass.hpp"
 
 #endif
 
