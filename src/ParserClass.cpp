@@ -9,11 +9,7 @@ Parser::Parser(std::list<std::string> tokenOperations, std::list<std::string> to
 				<< std::endl
 				;
 			literalStart++;
-			//do something ...
-
-			//			tokenLiterals.pop_front();
 		}
-		//	tokenOperations.pop_front();
 	}
 }
 
