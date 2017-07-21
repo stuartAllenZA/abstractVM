@@ -21,24 +21,20 @@ std::list<std::string>		Lexer::getTokensLiterals() {
 
 void							Lexer::_readFileContentsToTokens(char *fileName) {
 	std::ifstream fileHandle(fileName);
-	_n = 0;
+		std::list<std::string>::iterator start;
+
+		int count = 0;
 	try {
 		if (fileHandle.is_open()) {
 			while (std::getline(fileHandle, _line)) {
 				if (_line.substr(0,1) == ";" && _line.substr(1,1) != ";")
 					continue;
-				else {
-					_lexicalAnalysis(_line);
-					_n++;
-				}
+				else _lexicalAnalysis(_line);
 			}
 		}
 
 		else throw Exceptions::FileException();
 
-		std::list<std::string>::iterator start;
-
-		int count = 0;
 		try {
 			for (start = _tokenOperations.begin();start != _tokenOperations.end(); start++) {
 				if ((count == _n && *start != ";;") && (((count - 1) == (_n - 1)) && *(--start) != "exit")) 
@@ -119,19 +115,14 @@ void							Lexer::_launchShell() {
 	std::list<std::string>::iterator start;
   	int count = 0;
 	try {
-		_n = 0;
 		while (std::getline(std::cin, _line)) {
 			if (_line.substr(0,1) == ";" && _line.substr(1,1) != ";")
 				continue;
 			else if (_line.substr(0,2) == ";;") {
 				_lexicalAnalysis(_line);
-				_n++;
 				break;
 			}
-			else {
-				_lexicalAnalysis(_line);
-				_n++;
-			}
+			else _lexicalAnalysis(_line);
 		}
 
 		try {
