@@ -12,8 +12,8 @@ union Data {
 };
 
 class Token {
-	Type type;
-	Data data;
+//	Type type;
+//	Data data;
 };
 
 #endif

@@ -93,9 +93,9 @@ bool							Lexer::_isValidOperation(std::string operation) {
 }
 
 bool							Lexer::_isValidLiteral(std::string operation, std::string literal) {
-	std::regex regexInt8 ("int8.?\\(.?\\d+\\)");
-	std::regex regexInt16 ("int16.?\\(.?\\d+\\)");
-	std::regex regexInt32 ("int32.?\\(.?\\d+\\)");
+	std::regex regexInt8 ("int8.?\\([+-]?(\\d)+\\)");
+	std::regex regexInt16 ("int16.?\\([+-]?(\\d)+\\)");
+	std::regex regexInt32 ("int32.?\\([+-]?(\\d)+\\)");
 	std::regex regexFloat ("float\\([+-]?([0-9]*[.])?[0-9]+\\)");
 	std::regex regexDouble ("double\\([+-]?([0-9]*[.])?[0-9]+\\)");
 
@@ -116,6 +116,8 @@ bool							Lexer::_isValidLiteral(std::string operation, std::string literal) {
 }
 
 void							Lexer::_launchShell() {
+	std::list<std::string>::iterator start;
+  	int count = 0;
 	try {
 		_n = 0;
 		while (std::getline(std::cin, _line)) {
@@ -132,13 +134,14 @@ void							Lexer::_launchShell() {
 			}
 		}
 
-		std::list<std::string>::const_iterator tokenOperationsEnd = _tokenOperations.end();
-
-
 		try {
-			if (*tokenOperationsEnd != ";;" || *(--tokenOperationsEnd) != "exit")
-				throw Exceptions::MissingTerminatorException();
+			for (start = _tokenOperations.begin();start != _tokenOperations.end(); start++) {
+				if ((count == _n && *start != ";;") && (((count - 1) == (_n - 1)) && *(--start) != "exit")) 
+					throw Exceptions::MissingTerminatorException();
+				count++;
+			}
 		} catch (Exceptions::MissingTerminatorException const &) { throw; }
+
 	} catch (Exceptions::FileFormatException const &) { throw; }
 
 }

@@ -20,8 +20,6 @@ class Parser {
 		void	terminate();
 
 	private:
-		std::list<Token> _stack;
-
-
+//		std::list<Token> _stack;
 };
 
