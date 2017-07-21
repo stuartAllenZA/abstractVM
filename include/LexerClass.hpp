@@ -15,6 +15,7 @@ class Lexer {
 		Lexer(int, char**);
 		std::list<std::string>	getTokensOperations();
 		std::list<std::string>	getTokensLiterals();
+		std::list<std::string>	getTokensLiteralsTypes();
 
 	private:
 		void					_readFileContentsToTokens(char*);
@@ -22,9 +23,12 @@ class Lexer {
 		void					_lexicalAnalysis(std::string);
 		bool					_isValidOperation(std::string);
 		bool					_isValidLiteral(std::string, std::string);
+		std::string				_getLiteral(std::string);
+		std::string				_getLiteralType(std::string);
 
 		std::list<std::string>	_tokenOperations;
 		std::list<std::string>	_tokenLiterals;
+		std::list<std::string>	_tokenLiteralsTypes;
 		std::string				_line;
 		int						_n;
 };

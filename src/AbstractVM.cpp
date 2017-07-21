@@ -5,6 +5,7 @@ int		main(int ac, char **av) {
 		Lexer lexer(ac, av);
 		Parser(
 				lexer.getTokensOperations(),
+				lexer.getTokensLiteralsTypes(),
 				lexer.getTokensLiterals()
 		);
 	}

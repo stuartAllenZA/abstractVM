@@ -6,9 +6,9 @@
 
 class Parser {
 	public:
-		Parser(std::list<std::string>, std::list<std::string>);
-		void	push(std::string);
-		void	assert(std::string);
+		Parser(std::list<std::string>, std::list<std::string>, std::list<std::string>);
+		void	push(std::string, std::string);
+		void	assert(std::string, std::string);
 		void	pop();
 		void	add();
 		void	sub();

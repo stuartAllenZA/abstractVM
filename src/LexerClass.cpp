@@ -19,17 +19,24 @@ std::list<std::string>		Lexer::getTokensLiterals() {
 	return _tokenLiterals;
 }
 
+std::list<std::string>		Lexer::getTokensLiteralsTypes() {
+	return _tokenLiteralsTypes;
+}
+
 void							Lexer::_readFileContentsToTokens(char *fileName) {
 	std::ifstream fileHandle(fileName);
-		std::list<std::string>::iterator start;
+	std::list<std::string>::iterator start;
 
-		int count = 0;
+	int count = 0;
 	try {
 		if (fileHandle.is_open()) {
 			while (std::getline(fileHandle, _line)) {
 				if (_line.substr(0,1) == ";" && _line.substr(1,1) != ";")
 					continue;
-				else _lexicalAnalysis(_line);
+				else {
+					_lexicalAnalysis(_line);
+					_n++;
+				}
 			}
 		}
 
@@ -37,7 +44,7 @@ void							Lexer::_readFileContentsToTokens(char *fileName) {
 
 		try {
 			for (start = _tokenOperations.begin();start != _tokenOperations.end(); start++) {
-				if ((count == _n && *start != ";;") && (((count - 1) == (_n - 1)) && *(--start) != "exit")) 
+				if ((count == _n && *start != "exit"))
 					throw Exceptions::MissingTerminatorException();
 				count++;
 			}
@@ -62,7 +69,8 @@ void							Lexer::_lexicalAnalysis(std::string line) {
 		if (iss >> operation >> literal) {
 			if (_isValidLiteral(operation, literal)) {
 				_tokenOperations.push_back(operation);
-				_tokenLiterals.push_back(literal);
+				_tokenLiterals.push_back(_getLiteral(literal));
+				_tokenLiteralsTypes.push_back(_getLiteralType(literal));
 			} else throw Exceptions::FileFormatException();
 		} else {
 			if (_isValidOperation(operation)) {
@@ -71,6 +79,42 @@ void							Lexer::_lexicalAnalysis(std::string line) {
 			} else throw Exceptions::FileFormatException();
 		}
 	}
+}
+
+std::string						Lexer::_getLiteral(std::string literal) {
+	std::regex regexI ("\\([+-]?(\\d.*)+\\)");
+	std::regex regexFD ("([+-]?([0-9]*[.])?[0-9]+)");
+	std::smatch regexMatch;
+
+	if (regex_search(literal, regexMatch, regexI)) {
+		std::string st = regexMatch[0];
+		st = st.erase(0, 1);
+		st = st.erase(st.size()-1);
+		return st;
+	}
+	else if (regex_search(literal, regexMatch, regexFD)) {
+		std::string st = regexMatch[0];
+		st = st.erase(0, 1);
+		st = st.erase(st.size()-1);
+		return st;
+	}
+	return "error";
+}
+
+std::string						Lexer::_getLiteralType(std::string literal) {
+	std::regex regexI ("int?(\\d)+\\(");
+	std::regex regexF ("float");
+	std::regex regexD ("double");
+	std::smatch regexMatch;
+
+	if (regex_search(literal, regexMatch, regexI)) {
+		std::string st = regexMatch[0];
+		st = st.erase(st.size()-1);
+		return st;
+	}
+	else if (regex_match(literal, regexMatch, regexF))
+		return "float";	
+	return "double";
 }
 
 bool							Lexer::_isValidOperation(std::string operation) {
@@ -113,7 +157,7 @@ bool							Lexer::_isValidLiteral(std::string operation, std::string literal) {
 
 void							Lexer::_launchShell() {
 	std::list<std::string>::iterator start;
-  	int count = 0;
+	int count = 0;
 	try {
 		while (std::getline(std::cin, _line)) {
 			if (_line.substr(0,1) == ";" && _line.substr(1,1) != ";")
@@ -122,11 +166,14 @@ void							Lexer::_launchShell() {
 				_lexicalAnalysis(_line);
 				break;
 			}
-			else _lexicalAnalysis(_line);
+			else {
+				_lexicalAnalysis(_line);
+				_n++;
+			}
 		}
 
 		try {
-			for (start = _tokenOperations.begin();start != _tokenOperations.end(); start++) {
+			for (start = _tokenOperations.begin(); start != _tokenOperations.end(); start++) {
 				if ((count == _n && *start != ";;") && (((count - 1) == (_n - 1)) && *(--start) != "exit")) 
 					throw Exceptions::MissingTerminatorException();
 				count++;
@@ -134,6 +181,5 @@ void							Lexer::_launchShell() {
 		} catch (Exceptions::MissingTerminatorException const &) { throw; }
 
 	} catch (Exceptions::FileFormatException const &) { throw; }
-
 }
 
